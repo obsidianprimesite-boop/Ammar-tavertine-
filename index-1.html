@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ammar Travertine — Premium Loralai Stone. Pakistan's finest natural travertine and marble.">
+<title>Ammar Travertine — The Art of Natural Stone</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,700;1,6..96,300;1,6..96,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0a0906;--ink2:#141210;--ink3:#1c1a16;
+  --gold:#c8a96e;--gold2:#e8c98e;
+  --txt:#9a8c7a;--txt2:#6a5c4a;--w:#fefcf8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--txt);overflow-x:hidden;cursor:none;font-size:14px}
+
+/* CURSOR */
+#cur{width:6px;height:6px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur2{width:36px;height:36px;border:1px solid rgba(200,169,110,.35);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--ink);z-index:9990;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .8s,visibility .8s}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none}
+.l-logo{font-family:'Bodoni Moda',serif;font-size:1.8rem;font-weight:300;color:var(--w);letter-spacing:.15em}
+.l-logo em{color:var(--gold);font-style:italic}
+.l-bar{width:160px;height:1px;background:var(--ink3);overflow:hidden}
+.l-bar::after{content:'';display:block;width:100%;height:100%;background:var(--gold);transform:translateX(-100%);animation:lb 1.8s ease forwards}
+@keyframes lb{to{transform:translateX(0)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:1.5rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
+nav.scrolled{background:rgba(10,9,6,.96);backdrop-filter:blur(20px);padding:1rem 5vw;border-bottom:1px solid rgba(200,169,110,.08)}
+.n-logo{font-family:'Bodoni Moda',serif;font-size:1.2rem;font-weight:400;color:var(--w);text-decoration:none;letter-spacing:.08em}
+.n-logo em{color:var(--gold);font-style:italic}
+.n-links{list-style:none;display:flex;gap:2rem;align-items:center}
+.n-links a{color:var(--txt);text-decoration:none;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:300;transition:color .3s}
+.n-links a:hover{color:var(--gold)}
+.n-cta{border:1px solid rgba(200,169,110,.45)!important;padding:.5rem 1.4rem;color:var(--gold)!important}
+.n-cta:hover{background:var(--gold)!important;color:var(--ink)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:none}
+.hbg span{width:22px;height:1px;background:var(--w);display:block}
+
+/* HERO */
+.hero{height:100svh;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;animation:hz 18s ease-in-out infinite alternate;filter:brightness(.45) saturate(1.2)}
+@keyframes hz{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,6,.5) 0%,rgba(10,9,6,.3) 40%,rgba(10,9,6,.8) 100%)}
+.hero-c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 5vw}
+.h-eye{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;justify-content:center;opacity:0;animation:fu .9s .4s forwards}
+.h-eye::before,.h-eye::after{content:'';flex:1;max-width:50px;height:1px;background:var(--gold)}
+.h-eye span{font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;line-height:1.1;color:var(--w);opacity:0;animation:fu .9s .6s forwards;max-width:800px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.6);font-weight:300;max-width:520px;margin:1.8rem auto 2.8rem;opacity:0;animation:fu .9s .8s forwards}
+.hero-btns{display:flex;gap:1rem;justify-content:center;opacity:0;animation:fu .9s 1s forwards}
+.btn-g{background:var(--gold);color:var(--ink);padding:.85rem 2.2rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;text-decoration:none;font-family:'Outfit',sans-serif;transition:all .3s;border:none;cursor:none;display:inline-block}
+.btn-g:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 15px 40px rgba(200,169,110,.3)}
+.btn-o{border:1px solid rgba(200,169,110,.4);color:var(--gold);padding:.85rem 2.2rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;font-family:'Outfit',sans-serif;transition:all .3s;cursor:none}
+.btn-o:hover{border-color:var(--gold);background:rgba(200,169,110,.08)}
+
+/* STATS BAR */
+.stats-bar{background:var(--ink2);border-top:1px solid rgba(200,169,110,.1);border-bottom:1px solid rgba(200,169,110,.1);display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:2rem 1rem;border-right:1px solid rgba(200,169,110,.1);transition:background .3s}
+.stat:last-child{border-right:none}
+.stat:hover{background:var(--ink3)}
+.stat-n{font-family:'Bodoni Moda',serif;font-size:2rem;font-weight:400;color:var(--gold);display:block;line-height:1;margin-bottom:.3rem}
+.stat-l{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2)}
+
+/* STRIP */
+.strip{background:var(--gold);overflow:hidden;white-space:nowrap;padding:.75rem 0}
+.strip-in{display:inline-block;animation:str 25s linear infinite}
+.strip span{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);font-weight:500;padding:0 2.5rem}
+.strip span::before{content:'◆';margin-right:2.5rem}
+@keyframes str{to{transform:translateX(-50%)}}
+
+/* SECTION */
+.sec{padding:5rem 5vw}
+.sec-center{text-align:center}
+.sec-tag{display:inline-flex;align-items:center;gap:.8rem;margin-bottom:1.2rem}
+.sec-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
+.sec-tag span{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+.sec-h{font-family:'Bodoni Moda',serif;font-size:clamp(1.7rem,3vw,2.8rem);font-weight:300;color:var(--w);line-height:1.2;margin-bottom:1rem}
+.sec-h em{font-style:italic;color:var(--gold)}
+.sec-p{font-size:.85rem;line-height:1.95;color:var(--txt);font-weight:300;max-width:560px}
+.sec-center .sec-p{margin:0 auto}
+.sec-center .sec-tag{justify-content:center}
+
+/* ABOUT */
+.about{background:var(--ink2)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;max-width:1200px;margin:0 auto}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;gap:.8rem}
+.about-imgs img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
+.about-imgs img:first-child{grid-row:span 2}
+.about-txt{padding:1rem 0}
+.about-txt .sec-p{margin:1rem 0 2rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem}
+.trait{padding:1.2rem;background:var(--ink3);border-left:2px solid var(--gold);transition:background .3s}
+.trait:hover{background:var(--ink)}
+.trait i{font-size:1.2rem;display:block;margin-bottom:.5rem;font-style:normal}
+.trait h4{font-size:.8rem;font-weight:500;color:var(--w);margin-bottom:.2rem}
+.trait p{font-size:.72rem;color:var(--txt);line-height:1.6}
+
+/* PRODUCTS */
+.products{background:var(--ink)}
+.prod-head{text-align:center;margin-bottom:2.5rem}
+.prod-tabs{display:flex;gap:.4rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap}
+.tab{padding:.45rem 1.2rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-family:'Outfit',sans-serif;border:1px solid rgba(200,169,110,.2);color:var(--txt2);background:none;cursor:none;transition:all .3s}
+.tab.active,.tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,169,110,.06)}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.prod-card{background:var(--ink2);overflow:hidden;position:relative;transition:transform .4s}
+.prod-card:hover{transform:translateY(-5px)}
+.prod-img{overflow:hidden;height:240px;position:relative}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s;filter:brightness(.8)}
+.prod-card:hover .prod-img img{transform:scale(1.06);filter:brightness(.95)}
+.prod-badge{position:absolute;top:1rem;left:1rem;background:var(--gold);color:var(--ink);padding:.2rem .7rem;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;z-index:2}
+.prod-info{padding:1.5rem}
+.prod-info h3{font-family:'Bodoni Moda',serif;font-size:1.2rem;font-weight:400;color:var(--w);margin-bottom:.4rem}
+.prod-info p{font-size:.78rem;color:var(--txt);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.prod-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.ptag{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid rgba(200,169,110,.2);color:var(--txt2)}
+.prod-bar{position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .4s}
+.prod-card:hover .prod-bar{width:100%}
+
+/* GALLERY */
+.gallery{background:var(--ink2)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:.8rem;margin-top:2.5rem}
+.gal-item{overflow:hidden;position:relative}
+.gal-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal-item:nth-child(2){grid-column:span 2}
+.gal-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.75);transition:transform .6s,filter .5s}
+.gal-item:hover img{transform:scale(1.07);filter:brightness(.95)}
+.gal-overlay{position:absolute;inset:0;background:rgba(10,9,6,0);transition:background .3s;display:flex;align-items:flex-end;padding:1.2rem}
+.gal-item:hover .gal-overlay{background:rgba(10,9,6,.3)}
+.gal-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0);transition:color .3s}
+.gal-item:hover .gal-label{color:var(--gold)}
+
+/* APPLICATIONS */
+.apps{background:var(--ink)}
+.apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.app-card{position:relative;overflow:hidden;cursor:none;height:260px}
+.app-card:first-child{grid-column:span 2;height:320px}
+.app-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s,filter .5s;filter:brightness(.65)}
+.app-card:hover img{transform:scale(1.06);filter:brightness(.82)}
+.app-ovl{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(10,9,6,.85) 100%)}
+.app-tag{position:absolute;top:1rem;right:1rem;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.35);color:var(--gold);padding:.25rem .7rem;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.app-txt{position:absolute;bottom:0;left:0;right:0;padding:1.5rem}
+.app-txt h3{font-family:'Bodoni Moda',serif;font-size:1.1rem;font-weight:400;color:var(--w);margin-bottom:.3rem}
+.app-txt p{font-size:.75rem;color:rgba(255,255,255,.55);font-weight:300;max-height:0;overflow:hidden;transition:max-height .4s,opacity .4s;opacity:0}
+.app-card:hover .app-txt p{max-height:80px;opacity:1}
+
+/* TESTIMONIALS */
+.testi{background:var(--ink2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.tcard{background:var(--ink3);padding:2rem;border:1px solid rgba(200,169,110,.08);transition:border-color .3s,transform .3s;position:relative}
+.tcard:hover{border-color:rgba(200,169,110,.3);transform:translateY(-4px)}
+.stars{color:var(--gold);font-size:.78rem;letter-spacing:.15em;margin-bottom:1.2rem;display:block}
+.ttext{font-size:.8rem;line-height:1.9;color:var(--txt);font-weight:300;font-style:italic;margin-bottom:1.5rem}
+.tauth{display:flex;align-items:center;gap:.9rem;border-top:1px solid rgba(200,169,110,.1);padding-top:1.2rem}
+.tav{width:38px;height:38px;border-radius:50%;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:1rem;color:var(--gold);flex-shrink:0}
+.tauth-i strong{display:block;font-size:.78rem;color:var(--w);font-weight:400;margin-bottom:.15rem}
+.tauth-i span{font-size:.65rem;color:var(--txt2);letter-spacing:.06em}
+
+/* WHY */
+.why{background:var(--ink)}
+.why-inner{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;max-width:1200px;margin:0 auto}
+.why-imgs{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.why-imgs img{width:100%;height:220px;object-fit:cover;filter:brightness(.8)}
+.why-imgs img:first-child{height:460px;grid-row:span 2}
+.why-content .sec-p{margin:1rem 0 2rem}
+.why-list{list-style:none}
+.why-item{padding:1.2rem 0;border-bottom:1px solid rgba(200,169,110,.08);display:flex;gap:1.4rem;transition:padding-left .3s}
+.why-item:hover{padding-left:.6rem}
+.why-n{font-family:'Bodoni Moda',serif;font-size:1.4rem;font-weight:300;color:rgba(200,169,110,.25);min-width:32px;line-height:1;padding-top:.2rem}
+.why-c h4{font-size:.85rem;font-weight:500;color:var(--w);margin-bottom:.3rem}
+.why-c p{font-size:.78rem;color:var(--txt);line-height:1.8;font-weight:300}
+
+/* CONTACT */
+.contact{background:var(--ink2)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5vw;max-width:1200px;margin:0 auto}
+.contact-l .sec-p{margin:1rem 0 2rem}
+.cinfo{display:flex;flex-direction:column;gap:.8rem}
+.ccard{display:flex;align-items:center;gap:1.2rem;padding:1.2rem;background:var(--ink3);border:1px solid rgba(200,169,110,.08);transition:border-color .3s}
+.ccard:hover{border-color:rgba(200,169,110,.3)}
+.cicon{width:42px;height:42px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ccontent strong{display:block;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+.ccontent span{font-size:.8rem;color:var(--txt);font-weight:300}
+.wa-cta{display:inline-flex;align-items:center;gap:.8rem;background:#25D366;color:#fff;padding:.95rem 2rem;text-decoration:none;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:500;transition:all .3s;margin-top:1.5rem}
+.wa-cta:hover{background:#128C7E;transform:translateY(-2px)}
+.cform{display:flex;flex-direction:column;gap:1.2rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.45rem}
+.fg label{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.fg input,.fg textarea,.fg select{padding:.85rem 1rem;background:var(--ink3);border:1px solid rgba(200,169,110,.12);color:var(--w);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:300;outline:none;transition:border-color .3s;-webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(200,169,110,.45);background:var(--ink)}
+.fg textarea{resize:vertical;min-height:120px}
+.fg select option{background:var(--ink2)}
+
+/* FOOTER */
+footer{background:var(--ink3);border-top:1px solid rgba(200,169,110,.08)}
+.footer-top{padding:4rem 5vw 3rem;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;border-bottom:1px solid rgba(200,169,110,.08)}
+.fb-logo{font-family:'Bodoni Moda',serif;font-size:1.2rem;font-weight:400;color:var(--w);text-decoration:none;letter-spacing:.08em;display:inline-block;margin-bottom:1rem}
+.fb-logo em{color:var(--gold);font-style:italic}
+.fbrand p{font-size:.75rem;color:var(--txt2);line-height:1.85;font-weight:300}
+.fcol h4{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:.7rem}
+.fcol a{text-decoration:none;color:var(--txt2);font-size:.78rem;font-weight:300;transition:color .3s}
+.fcol a:hover{color:var(--gold)}
+.footer-bot{padding:1.2rem 5vw;display:flex;justify-content:space-between;align-items:center}
+.footer-bot p{font-size:.68rem;color:var(--txt2);letter-spacing:.05em}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:700;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 6px 25px rgba(37,211,102,.35);transition:all .3s;animation:wap 3s infinite}
+.wa-float:hover{transform:scale(1.12) translateY(-3px)}
+.wa-float::before{content:'';position:absolute;inset:-5px;border:2px solid rgba(37,211,102,.3);border-radius:50%;animation:wap2 2s infinite}
+.wa-tip{position:absolute;right:62px;background:var(--ink2);color:var(--w);padding:.45rem .9rem;font-size:.68rem;white-space:nowrap;border:1px solid rgba(200,169,110,.2);opacity:0;pointer-events:none;transition:opacity .3s}
+.wa-float:hover .wa-tip{opacity:1}
+@keyframes wap{0%,100%{box-shadow:0 6px 25px rgba(37,211,102,.35)}50%{box-shadow:0 10px 35px rgba(37,211,102,.55)}}
+@keyframes wap2{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}
+.rv.on{opacity:1;transform:translateY(0)}
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* MOBILE */
+@media(max-width:900px){
+  body{cursor:auto;font-size:14px}
+  #cur,#cur2{display:none}
+  nav{padding:1rem 5vw}
+  .n-links{display:none}
+  .hbg{display:flex}
+  .n-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:rgba(10,9,6,.97);justify-content:center;align-items:center;gap:2rem;z-index:900}
+  .about-inner,.why-inner,.contact-inner{grid-template-columns:1fr}
+  .about-imgs{grid-template-columns:1fr 1fr;grid-template-rows:160px}
+  .about-imgs img:first-child{grid-row:span 1}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}
+  .gal-item:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .gal-item:nth-child(2){grid-column:span 2}
+  .apps-grid{grid-template-columns:1fr}
+  .app-card:first-child,.app-card{height:220px;grid-column:span 1}
+  .testi-grid{grid-template-columns:1fr}
+  .why-imgs{grid-template-columns:1fr}
+  .why-imgs img:first-child{height:220px;grid-row:span 1}
+  .why-imgs img:last-child{display:none}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-bot{flex-direction:column;gap:.4rem;text-align:center}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .prod-grid{grid-template-columns:1fr}
+  .traits{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-logo">Ammar <em>Travertine</em></div>
+  <div class="l-bar"></div>
+</div>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/923363020368?text=Hello!%20I%20am%20interested%20in%20your%20Travertine%20%26%20Marble." class="wa-float" target="_blank">
+  💬<span class="wa-tip">Chat on WhatsApp</span>
+</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="n-logo">Ammar <em>Travertine</em></a>
+  <ul class="n-links" id="nLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="n-cta">Get Quote</a></li>
+  </ul>
+  <div class="hbg" onclick="document.getElementById('nLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=1600&q=85" alt="Loralai Travertine">
+  </div>
+  <div class="hero-grad"></div>
+  <div class="hero-c">
+    <div class="h-eye"><span>Loralai Stone — Pakistan's Finest Natural Stone</span></div>
+    <h1>The Art of <em>Natural</em> Stone</h1>
+    <p class="hero-sub">Premium Travertine and Marble quarried from the ancient hills of Loralai, Balochistan. Trusted by architects, developers, and designers across Pakistan and beyond.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-g">Request a Quote</a>
+      <a href="#products" class="btn-o">View Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat rv"><span class="stat-n">15+</span><span class="stat-l">Years in Business</span></div>
+  <div class="stat rv"><span class="stat-n">500+</span><span class="stat-l">Projects Completed</span></div>
+  <div class="stat rv"><span class="stat-n">12+</span><span class="stat-l">Countries Exported</span></div>
+  <div class="stat rv"><span class="stat-n">100%</span><span class="stat-l">Natural Stone</span></div>
+</div>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-in">
+    <span>Loralai Travertine</span><span>Classic Marble</span><span>Silver Stone</span><span>Custom Cutting</span><span>Export Ready</span><span>Direct from Quarry</span><span>Interior & Exterior</span><span>Premium Quality</span>
+    <span>Loralai Travertine</span><span>Classic Marble</span><span>Silver Stone</span><span>Custom Cutting</span><span>Export Ready</span><span>Direct from Quarry</span><span>Interior & Exterior</span><span>Premium Quality</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec about" id="about">
+  <div class="about-inner">
+    <div class="about-imgs rv">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Loralai quarry">
+      <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=500&q=80" alt="Marble interior">
+      <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=500&q=80" alt="Stone showroom">
+    </div>
+    <div class="about-txt rv">
+      <div class="sec-tag"><span>The Loralai Difference</span></div>
+      <h2 class="sec-h">Stone Born from<br><em>Ancient</em> Mountains</h2>
+      <p class="sec-p">Ammar Travertine is built on the geological treasure of Loralai, Balochistan — one of Pakistan's most prized natural stone origins. We supply directly from our own quarry, ensuring every slab is the finest available.</p>
+      <div class="traits">
+        <div class="trait"><i>🏔️</i><h4>Direct Source</h4><p>Own quarry in Loralai — best prices</p></div>
+        <div class="trait"><i>✂️</i><h4>Custom Cutting</h4><p>Any size, any finish you require</p></div>
+        <div class="trait"><i>🚢</i><h4>Export Ready</h4><p>Certified international packaging</p></div>
+        <div class="trait"><i>🔬</i><h4>Quality Tested</h4><p>Every slab inspected before dispatch</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="sec products" id="products">
+  <div class="prod-head rv">
+    <div class="sec-tag sec-center" style="justify-content:center"><span>Our Collection</span></div>
+    <h2 class="sec-h" style="text-align:center">Premium <em>Stone</em> Collection</h2>
+    <p class="sec-p" style="text-align:center;margin:0 auto 0">Sourced directly from Loralai — crafted for spaces that demand excellence</p>
+  </div>
+  <div class="prod-tabs rv">
+    <button class="tab active" onclick="filterProd(this,'all')">All Stone</button>
+    <button class="tab" onclick="filterProd(this,'interior')">Interior</button>
+    <button class="tab" onclick="filterProd(this,'exterior')">Exterior</button>
+    <button class="tab" onclick="filterProd(this,'export')">Export</button>
+  </div>
+  <div class="prod-grid rv">
+    <div class="prod-card" data-cat="interior exterior export">
+      <div class="prod-img"><img src="https://images.unsplash.com/photo-1567225557594-88d73398014a?w=600&q=80" alt="Classic Travertine"><span class="prod-badge">⭐ Bestseller</span></div>
+      <div class="prod-info"><h3>Classic Loralai Travertine</h3><p>Warm ivory and cream tones with natural veining. The signature Loralai stone for grand interiors and prestigious exteriors.</p><div class="prod-tags"><span class="ptag">Flooring</span><span class="ptag">Wall Cladding</span><span class="ptag">Polished</span><span class="ptag">Export</span></div></div>
+      <div class="prod-bar"></div>
+    </div>
+    <div class="prod-card" data-cat="interior">
+      <div class="prod-img"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80" alt="Silver Travertine"><span class="prod-badge">Modern</span></div>
+      <div class="prod-info"><h3>Silver Travertine</h3><p>Cool grey undertones with graceful natural movement. The refined choice for contemporary luxury spaces.</p><div class="prod-tags"><span class="ptag">Interior</span><span class="ptag">Honed</span><span class="ptag">Brushed</span></div></div>
+      <div class="prod-bar"></div>
+    </div>
+    <div class="prod-card" data-cat="exterior export">
+      <div class="prod-img"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&q=80" alt="Noce Travertine"><span class="prod-badge">Luxury</span></div>
+      <div class="prod-info"><h3>Noce Travertine</h3><p>Rich walnut tones for spaces where character and presence are paramount. Ideal for luxury applications.</p><div class="prod-tags"><span class="ptag">Exterior</span><span class="ptag">Tumbled</span><span class="ptag">Export</span></div></div>
+      <div class="prod-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery" id="gallery">
+  <div class="rv sec-center">
+    <div class="sec-tag" style="justify-content:center"><span>Stone Gallery</span></div>
+    <h2 class="sec-h">Natural <em>Beauty</em> in Every Slab</h2>
+  </div>
+  <div class="gal-grid rv">
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=900&q=80" alt="Gallery 1"><div class="gal-overlay"><span class="gal-label">Villa Interior</span></div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=700&q=80" alt="Gallery 2"><div class="gal-overlay"><span class="gal-label">Travertine Close-up</span></div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80" alt="Gallery 3"><div class="gal-overlay"><span class="gal-label">Kitchen Stone</span></div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1618220048045-10a6dbdf83e0?w=500&q=80" alt="Gallery 4"><div class="gal-overlay"><span class="gal-label">Marble Detail</span></div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1600566752734-2a0cd66d1f20?w=500&q=80" alt="Gallery 5"><div class="gal-overlay"><span class="gal-label">Outdoor Design</span></div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=500&q=80" alt="Gallery 6"><div class="gal-overlay"><span class="gal-label">Hotel Lobby</span></div></div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section class="sec apps" id="applications">
+  <div class="rv sec-center">
+    <div class="sec-tag" style="justify-content:center"><span>Applications</span></div>
+    <h2 class="sec-h">Spaces <em>Transformed</em> by Natural Stone</h2>
+  </div>
+  <div class="apps-grid rv">
+    <div class="app-card"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80" alt="Villa"><div class="app-ovl"></div><span class="app-tag">Residential</span><div class="app-txt"><h3>Luxury Villas & Homes</h3><p>Bespoke stone for residential masterpieces that reflect a taste for excellence.</p></div></div>
+    <div class="app-card"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Office"><div class="app-ovl"></div><span class="app-tag">Commercial</span><div class="app-txt"><h3>Corporate Spaces</h3><p>Stone lobbies and boardrooms that speak before words do.</p></div></div>
+    <div class="app-card"><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=600&q=80" alt="Hotel"><div class="app-ovl"></div><span class="app-tag">Hospitality</span><div class="app-txt"><h3>Hotels & Resorts</h3><p>Unforgettable stone installations for discerning guests.</p></div></div>
+    <div class="app-card"><img src="https://images.unsplash.com/photo-1600566752734-2a0cd66d1f20?w=600&q=80" alt="Outdoor"><div class="app-ovl"></div><span class="app-tag">Exterior</span><div class="app-txt"><h3>Outdoor & Landscape</h3><p>Weather-resistant Loralai stone for pools, facades, driveways.</p></div></div>
+    <div class="app-card"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen"><div class="app-ovl"></div><span class="app-tag">Kitchen</span><div class="app-txt"><h3>Kitchens & Countertops</h3><p>Precision-cut stone surfaces that elevate everyday spaces.</p></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testi" id="testimonials">
+  <div class="rv sec-center">
+    <div class="sec-tag" style="justify-content:center"><span>Client Reviews</span></div>
+    <h2 class="sec-h">Trusted by Pakistan's <em>Finest</em> Builders</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard rv"><span class="stars">★★★★★</span><p class="ttext">"We have sourced travertine from Ammar for three consecutive high-end projects in DHA Lahore. The consistency in quality and professionalism of their team is simply unmatched in Pakistan."</p><div class="tauth"><div class="tav">A</div><div class="tauth-i"><strong>Ahmed Raza</strong><span>Master Contractor — Lahore</span></div></div></div>
+    <div class="tcard rv"><span class="stars">★★★★★</span><p class="ttext">"The Classic Loralai Travertine we specified for our hotel lobby renovation was breathtaking. Direct quarry pricing made the entire project feasible without sacrificing an inch of quality."</p><div class="tauth"><div class="tav">S</div><div class="tauth-i"><strong>Sara Malik</strong><span>Interior Architect — Islamabad</span></div></div></div>
+    <div class="tcard rv"><span class="stars">★★★★★</span><p class="ttext">"Outstanding export service. Documentation was flawless, packaging immaculate, and stone arrived in perfect condition. Ammar will be our exclusive Pakistan supplier going forward."</p><div class="tauth"><div class="tav">M</div><div class="tauth-i"><strong>Muhammad Tariq</strong><span>Property Developer — Karachi</span></div></div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why">
+  <div class="why-inner">
+    <div class="why-imgs rv">
+      <img src="https://images.unsplash.com/photo-1618220048045-10a6dbdf83e0?w=700&q=85" alt="Stone craftsmanship">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Quarry">
+      <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=500&q=80" alt="Interior">
+    </div>
+    <div class="why-content rv">
+      <div class="sec-tag"><span>Why Choose Us</span></div>
+      <h2 class="sec-h">The Standard Others<br><em>Measure</em> Against</h2>
+      <p class="sec-p">15 years of delivering excellence — from Loralai quarry to your project site.</p>
+      <ul class="why-list">
+        <li class="why-item"><span class="why-n">01</span><div class="why-c"><h4>Direct Quarry Access</h4><p>No middlemen. Deal directly with the source for better prices and complete quality control.</p></div></li>
+        <li class="why-item"><span class="why-n">02</span><div class="why-c"><h4>Fully Custom Solutions</h4><p>Any dimension, thickness, or finish — polished, honed, brushed, or tumbled.</p></div></li>
+        <li class="why-item"><span class="why-n">03</span><div class="why-c"><h4>Proven Export Record</h4><p>12+ countries served with flawless documentation and certified packaging.</p></div></li>
+        <li class="why-item"><span class="why-n">04</span><div class="why-c"><h4>Zero Quality Compromise</h4><p>Every slab personally inspected for colour, veining, and structural integrity.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-l rv">
+      <div class="sec-tag"><span>Get In Touch</span></div>
+      <h2 class="sec-h">Let's Build Something <em>Extraordinary</em></h2>
+      <p class="sec-p">Whether you're an architect, contractor, developer, or homeowner — our team is ready to help you find the perfect stone.</p>
+      <div class="cinfo">
+        <div class="ccard"><div class="cicon">📍</div><div class="ccontent"><strong>Office</strong><span>Phase 5, Nawaz Sharif Interchange, Bedian Road, Lahore</span></div></div>
+        <div class="ccard"><div class="cicon">🏔️</div><div class="ccontent"><strong>Quarry</strong><span>Loralai, Balochistan, Pakistan</span></div></div>
+        <div class="ccard"><div class="cicon">📱</div><div class="ccontent"><strong>WhatsApp & Call</strong><span>+92 336 3020368</span></div></div>
+      </div>
+      <a href="https://wa.me/923363020368?text=Hello!%20I%20am%20interested%20in%20Loralai%20Travertine." class="wa-cta" target="_blank">💬 Chat on WhatsApp Now</a>
+    </div>
+    <div class="rv">
+      <div class="sec-tag"><span>Send an Inquiry</span></div>
+      <div class="cform">
+        <div class="frow">
+          <div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+          <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+92 xxx xxxxxxx"></div>
+        </div>
+        <div class="fg"><label>City / Country</label><input type="text" placeholder="Where are you located?"></div>
+        <div class="fg"><label>Product Interest</label>
+          <select>
+            <option>Classic Loralai Travertine</option>
+            <option>Silver Travertine</option>
+            <option>Noce Travertine</option>
+            <option>Custom Order</option>
+            <option>Bulk / Wholesale</option>
+            <option>Export Inquiry</option>
+          </select>
+        </div>
+        <div class="fg"><label>Project Details</label><textarea placeholder="Tell us about your project — quantity, dimensions, finish, timeline..."></textarea></div>
+        <button class="btn-g" style="border:none;cursor:none;width:100%;text-align:center" onclick="alert('Thank you! We will contact you within 24 hours.')">Submit Inquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="fbrand">
+      <a href="#" class="fb-logo">Ammar <em>Travertine</em></a>
+      <p>Pakistan's premier natural stone supplier. Premium Loralai Travertine and Marble sourced directly from our quarry in Balochistan. Trusted by architects and developers since over a decade.</p>
+    </div>
+    <div class="fcol"><h4>Navigate</h4><ul><li><a href="#about">About Us</a></li><li><a href="#products">Products</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#applications">Applications</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="fcol"><h4>Products</h4><ul><li><a href="#">Classic Travertine</a></li><li><a href="#">Silver Travertine</a></li><li><a href="#">Noce Travertine</a></li><li><a href="#">Custom Orders</a></li><li><a href="#">Export Inquiries</a></li></ul></div>
+    <div class="fcol"><h4>Contact</h4><ul><li><a href="https://wa.me/923363020368">WhatsApp Us</a></li><li><a href="tel:+923363020368">+92 336 3020368</a></li><li><a href="#">Bedian Road, Lahore</a></li><li><a href="#">Loralai, Balochistan</a></li></ul></div>
+  </div>
+  <div class="footer-bot">
+    <p>© 2025 Ammar Travertine — Premium Natural Stone from Pakistan. All rights reserved.</p>
+    <p>Phase 5, Nawaz Sharif Interchange, Bedian Road, Lahore</p>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{const l=document.getElementById('loader');l.classList.add('gone')},2000)});
+
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(loop)})();
+
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>60)});
+
+document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nLinks').classList.remove('open')));
+
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*70)})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+function filterProd(btn,cat){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-card').forEach(c=>{
+    const show=cat==='all'||( c.dataset.cat||'').includes(cat);
+    c.style.opacity=show?'1':'0.2';
+    c.style.transform=show?'':'scale(.96)';
+    c.style.transition='opacity .4s,transform .4s';
+  });
+}
+</script>
+</body>
+</html>
